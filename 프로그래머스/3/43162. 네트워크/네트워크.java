@@ -1,24 +1,25 @@
+import java.util.*;
 class Solution {
-    public int solution(int n, int[][] computers) {
-        int answer = 0;
-        boolean[] visited = new boolean[computers.length];
-        
-        for (int i = 0; i < computers.length; i++) {
-            if (!visited[i]) {
-                answer++;
-                backtrack(computers, visited, i);
-            }
+    public int solution(int n, int[][] computers){
+        int cnt = 0;
+        boolean[] visited = new boolean[n];
+        for(int i=0; i<n; i++){
+            if (visited[i]) continue;
+            dfs(n,computers, visited,i);
+            cnt++;
         }
-        
-        return answer;
+        return cnt;
     }
     
-    public void backtrack(int[][] computers, boolean[] visited, int n) {
-        visited[n] = true;
-        for (int i = 0; i < computers.length; i++) {
-            if (!visited[i] && computers[n][i] == 1) { 
-                backtrack(computers, visited, i); 
+    void dfs(int n, int[][] computers, boolean[] visited, int cur){
+        visited[cur] = true;
+        for(int i=0; i<n; i++){
+            if(!visited[i] && computers[cur][i]==1){
+                dfs(n,computers,visited,i);
             }
         }
     }
+    
+    
+    
 }
